@@ -1,0 +1,36 @@
+{
+  "DeployDescriptor":
+  [
+    {
+      "Property" : "ControlmServer",
+      "Assign"   : "psctm"
+    },
+    {
+      "Property" : "Application",
+      "Replace"  : [ {"RJA_Financial(.*)" : "RJA_Financial_Prod$1"} ]
+    },
+    {
+      "Property" : "SubApplication",
+      "Replace"  : [ {"RJA_Flow(.*)" : "RJA_Flow_Prod$1"} ]
+    },
+    {
+      "ApplyOn"  :  {"Type":"Folder"},
+      "Property" : "@",
+      "Replace"  : [ {"RJA_FIN_DEV(.*)" : "RJA_FIN_PROD$1"} ]
+    },
+    {
+      "ApplyOn"  :  {"Type":"Job"},
+      "Property" : "@",
+      "Replace"  : [ {"RJA_Dev(.*)" : "RJA_Prod$1"} ] 
+    },
+    {  
+      "Property" : "SiteStandard",
+      "Replace"  : [ {"RJA_LOOSE_STANDARD(.*)" : "RJA_LOOSE_STANDARD$1"} ]
+
+    },
+    {
+      "Property" : "Event",
+      "Replace"  : [ {"RJA_Dev(.*)" : "RJA_Prod$1"} ]
+      }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "RJA_FIN_DEV": {
+    "Type": "Folder",
+    "ControlmServer": "psctm",
+    "OrderMethod": "Manual",
+    "ActiveRetentionPolicy": "CleanEndedOK",
+    "SiteStandard": "RJA_LOOSE_STANDARD",
+    "SubApplication": "RJA_Flow",
+    "CreatedBy": "rjacobs",
+    "Application": "RJA_Financial",
+    "When": {
+      "RuleBasedCalendars": {
+        "Included": [
+          "EVERYDAY"
+        ],
+        "EVERYDAY": {
+          "Type": "Calendar:RuleBased",
+          "When": {
+            "DaysRelation": "OR",
+            "WeekDays": [
+              "NONE"
+            ],
+            "MonthDays": [
+              "ALL"
+            ]
+          }
+        }
+      }
+    },
+    "RJA_Dev1": {
+      "Type": "Job:Command",
+      "SubApplication": "RJA_Flow",
+      "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
+      "CreatedBy": "rjacobs",
+      "RunAs": "rjacobs@bmc.com",
+      "Application": "RJA_Financial",
+      "Command": "sleep 10",
+      "When": {
+        "WeekDays": [
+          "NONE"
+        ],
+        "MonthDays": [
+          "ALL"
+        ],
+        "DaysRelation": "OR"
+      },
+      "eventsToAdd": {
+        "Type": "AddEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev2"
+          },
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev3"
+          },
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev4"
+          }
+        ]
+      }
+    },
+    "RJA_Dev2": {
+      "Type": "Job:Command",
+      "SubApplication": "RJA_Flow",
+      "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
+      "CreatedBy": "rjacobs",
+      "RunAs": "rjacobs@bmc.com",
+      "Application": "RJA_Financial",
+      "Command": "sleep 10",
+      "When": {
+        "WeekDays": [
+          "NONE"
+        ],
+        "MonthDays": [
+          "ALL"
+        ],
+        "DaysRelation": "OR"
+      },
+      "eventsToWaitFor": {
+        "Type": "WaitForEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev2"
+          }
+        ]
+      },
+      "eventsToAdd": {
+        "Type": "AddEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev2_TO_RJA_Dev5"
+          }
+        ]
+      },
+      "eventsToDelete": {
+        "Type": "DeleteEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev2"
+          }
+        ]
+      }
+    },
+    "RJA_Dev3": {
+      "Type": "Job:Command",
+      "SubApplication": "RJA_Flow",
+      "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
+      "CreatedBy": "rjacobs",
+      "RunAs": "rjacobs@bmc.com",
+      "Application": "RJA_Financial",
+      "Command": "sleep 10",
+      "When": {
+        "WeekDays": [
+          "NONE"
+        ],
+        "MonthDays": [
+          "ALL"
+        ],
+        "DaysRelation": "OR"
+      },
+      "eventsToWaitFor": {
+        "Type": "WaitForEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev3"
+          }
+        ]
+      },
+      "eventsToAdd": {
+        "Type": "AddEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev3_TO_RJA_Dev5"
+          }
+        ]
+      },
+      "eventsToDelete": {
+        "Type": "DeleteEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev3"
+          }
+        ]
+      }
+    },
+    "RJA_Dev4": {
+      "Type": "Job:Command",
+      "SubApplication": "RJA_Flow",
+      "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
+      "CreatedBy": "rjacobs",
+      "RunAs": "rjacobs@bmc.com",
+      "Application": "RJA_Financial",
+      "Command": "sleep 10",
+      "When": {
+        "WeekDays": [
+          "NONE"
+        ],
+        "MonthDays": [
+          "ALL"
+        ],
+        "DaysRelation": "OR"
+      },
+      "eventsToWaitFor": {
+        "Type": "WaitForEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev4"
+          }
+        ]
+      },
+      "eventsToAdd": {
+        "Type": "AddEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev4_TO_RJA_Dev5"
+          }
+        ]
+      },
+      "eventsToDelete": {
+        "Type": "DeleteEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev1_TO_RJA_Dev4"
+          }
+        ]
+      }
+    },
+    "RJA_Dev5": {
+      "Type": "Job:Command",
+      "SubApplication": "RJA_Flow",
+      "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
+      "CreatedBy": "rjacobs",
+      "RunAs": "rjacobs@bmc.com",
+      "Application": "RJA_Financial",
+      "Command": "sleep 10",
+      "When": {
+        "WeekDays": [
+          "NONE"
+        ],
+        "MonthDays": [
+          "ALL"
+        ],
+        "DaysRelation": "OR"
+      },
+      "eventsToWaitFor": {
+        "Type": "WaitForEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev2_TO_RJA_Dev5"
+          },
+          {
+            "Event": "RJA_Dev3_TO_RJA_Dev5"
+          },
+          {
+            "Event": "RJA_Dev4_TO_RJA_Dev5"
+          }
+        ]
+      },
+      "eventsToDelete": {
+        "Type": "DeleteEvents",
+        "Events": [
+          {
+            "Event": "RJA_Dev2_TO_RJA_Dev5"
+          },
+          {
+            "Event": "RJA_Dev3_TO_RJA_Dev5"
+          },
+          {
+            "Event": "RJA_Dev4_TO_RJA_Dev5"
+          }
+        ]
+      }
+    }
+  }
+}
