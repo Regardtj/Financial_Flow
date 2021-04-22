@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Prep_Dev_Environment') {
+    stage('Development_Setup') {
       steps {
         echo 'Setting Development Environment'
         sh 'id'
@@ -17,7 +17,7 @@ pipeline {
       }
     }
 
-    stage('Validate') {
+    stage('Validate_Dev') {
       steps {
         echo 'Validate Workflow Syntax'
         sh 'ctm build findev.json'
@@ -25,15 +25,15 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+    stage('Deploy_Dev') {
       steps {
         echo 'Applying Deploy Descriptor Transform and Running Workflow on dev'
-        sh 'ctm run findev.json DevDeploy.json -e Austin_Dev'
+        sh 'ctm run findev.json -e Austin_Dev'
         echo 'Worklow Run Complete'
       }
     }
 
-    stage('Clean-up') {
+    stage('Clean-up_Dev') {
       steps {
         echo 'Deleting Development Environment'
         sh 'ctm env delete Austin_Dev'
@@ -41,7 +41,7 @@ pipeline {
       }
     }
 
-    stage('Prep_Environment_Prod') {
+    stage('Production_Setup') {
       steps {
         echo 'Setting Production Environment'
         sh 'ctm env add Austin_Prod "https://vl-aus-ctm-em01.ctm.bmc.com:8443/automation-api" "rjacobs" "Emd0103@"'
@@ -51,7 +51,15 @@ pipeline {
       }
     }
 
-    stage('Deploy_Workflow_Prod') {
+    stage('Validate_Prod') {
+      steps {
+        echo 'Validate Workflow Syntax'
+        sh 'ctm build findev.json'
+        echo 'Worklow Build Complete'
+      }
+    }
+
+    stage('Deploy_Prod') {
       steps {
         echo 'Applying Deploy Descriptor Transform and Running Workflow'
         sh 'ctm run findev.json ProdDeploy.json -e Austin_Prod'
@@ -59,7 +67,7 @@ pipeline {
       }
     }
 
-    stage('Clean-up Production Environment') {
+    stage('Clean-up_Prod') {
       steps {
         echo 'Deleting Production Environment'
         sh 'ctm env delete Austin_Prod'
