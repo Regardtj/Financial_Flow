@@ -28,7 +28,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Applying Deploy Descriptor Transform and Running Workflow on dev'
-        sh 'ctm run findev.json ProdDeploy.json -e Austin_Dev'
+        sh 'ctm run findev.json DevDeploy.json -e Austin_Dev'
         echo 'Worklow Run Complete'
       }
     }
@@ -44,9 +44,9 @@ pipeline {
     stage('Prep_Environment_Prod') {
       steps {
         echo 'Setting Production Environment'
-        sh 'ctm env add Production "https://cirrocumulus.bmci2t.com:8446/automation-api" "Reggie" "Password"'
+        sh 'ctm env add Austin_Prod "https://vl-aus-ctm-em01.ctm.bmc.com:8443/automation-api" "rjacobs" "Emd0103@"'
         sh 'ctm env show'
-        sh 'ctm env set Production'
+        sh 'ctm env set Austin_Prod'
         echo 'Environment was set to Prod'
       }
     }
@@ -54,7 +54,7 @@ pipeline {
     stage('Deploy_Workflow_Prod') {
       steps {
         echo 'Applying Deploy Descriptor Transform and Running Workflow'
-        sh 'ctm run findev.json ProdDeploy.json -e Production'
+        sh 'ctm run findev.json ProdDeploy.json -e Austin_Prod'
         echo 'Worklow Run Complete'
       }
     }
@@ -62,7 +62,7 @@ pipeline {
     stage('Clean-up Production Environment') {
       steps {
         echo 'Deleting Production Environment'
-        sh 'ctm env delete Production'
+        sh 'ctm env delete Austin_Prod'
         echo 'Environment delete Complete'
       }
     }
