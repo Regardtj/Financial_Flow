@@ -27,7 +27,7 @@
         }
       }
     },
-    "RJA_Dev1": {
+    "RJA_Data_Source": {
       "Type": "Job:Command",
       "SubApplication": "RJA_Flow",
       "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
@@ -59,7 +59,7 @@
         ]
       }
     },
-    "RJA_Dev2": {
+    "RJA_Data_Ingest": {
       "Type": "Job:Command",
       "SubApplication": "RJA_Flow",
       "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
@@ -101,7 +101,7 @@
         ]
       }
     },
-    "RJA_Dev3": {
+    "RJA_Data_Process": {
       "Type": "Job:Command",
       "SubApplication": "RJA_Flow",
       "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
@@ -143,7 +143,7 @@
         ]
       }
     },
-    "RJA_Dev4": {
+    "RJA_Data_Analyze": {
       "Type": "Job:Command",
       "SubApplication": "RJA_Flow",
       "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
@@ -185,7 +185,7 @@
         ]
       }
     },
-    "RJA_Dev5": {
+    "RJA_Data_Distribute": {
       "Type": "Job:Command",
       "SubApplication": "RJA_Flow",
       "Host": "vl-aus-ctm-ap01.ctm.bmc.com",
