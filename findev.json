@@ -216,6 +216,14 @@
           }
         ]
       },
+      "eventsToAdd": {
+        "Type": "AddEvents",
+        "Events": [
+          {
+            "Event": "RJA_Data_Distribute_TO_RJA_Application_SLA"
+          }
+        ]
+      },
       "eventsToDelete": {
         "Type": "DeleteEvents",
         "Events": [
@@ -227,6 +235,44 @@
           },
           {
             "Event": "RJA_Dev4_TO_RJA_Dev5"
+          }
+        ]
+      }
+    },
+    "RJA_Application_SLA": {
+      "Type": "Job:SLAManagement",
+      "ServiceName": "RJA_Data_Application_SLA",
+      "ServicePriority": "3",
+      "SubApplication": "RJA_Flow",
+      "JobRunsDeviationsTolerance": "3",
+      "CreatedBy": "rjacobs",
+      "RunAs": "rjacobs@bmc.com",
+      "Application": "RJA_Financial",
+      "CompleteIn": {
+        "Time": "0:1"
+      },
+      "When": {
+        "WeekDays": [
+          "NONE"
+        ],
+        "MonthDays": [
+          "ALL"
+        ],
+        "DaysRelation": "OR"
+      },
+      "eventsToWaitFor": {
+        "Type": "WaitForEvents",
+        "Events": [
+          {
+            "Event": "RJA_Data_Distribute_TO_RJA_Application_SLA"
+          }
+        ]
+      },
+      "eventsToDelete": {
+        "Type": "DeleteEvents",
+        "Events": [
+          {
+            "Event": "RJA_Data_Distribute_TO_RJA_Application_SLA"
           }
         ]
       }
